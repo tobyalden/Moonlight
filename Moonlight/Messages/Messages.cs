@@ -1,7 +1,7 @@
-using FNAECSTemplate.Systems;
+using Moonlight.Systems;
 using Microsoft.Xna.Framework;
 
-namespace FNAECSTemplate.Messages;
+namespace Moonlight.Messages;
 
 public readonly record struct ExampleMessage();
 public readonly record struct InputAction(float Value, Actions Action, ActionState State);

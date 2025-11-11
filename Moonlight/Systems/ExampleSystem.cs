@@ -1,10 +1,10 @@
 using System;
 using MoonTools.ECS;
-using FNAECSTemplate.Components;
-using FNAECSTemplate.Messages;
+using Moonlight.Components;
+using Moonlight.Messages;
 
 
-namespace FNAECSTemplate.Systems;
+namespace Moonlight.Systems;
 
 /*
 this is a system. systems can read and modify components and entities. 

@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
-namespace FNAECSTemplate.Utility;
+namespace Moonlight.Utility;
 
 public enum GenericInputs
 {

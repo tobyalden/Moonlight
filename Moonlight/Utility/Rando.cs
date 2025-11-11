@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace FNAECSTemplate.Utility;
+namespace Moonlight.Utility;
 public static class Rando
 {
     static Random Rand { get; } = new Random();

@@ -3,15 +3,15 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MoonTools.ECS;
-using FNAECSTemplate.Systems;
-using FNAECSTemplate.Components;
-using FNAECSTemplate.Renderers;
+using Moonlight.Systems;
+using Moonlight.Components;
+using Moonlight.Renderers;
 using FontStashSharp;
-using FNAECSTemplate.Content;
+using Moonlight.Content;
 
-namespace FNAECSTemplate;
+namespace Moonlight;
 
-public class Game1 : Game
+public class Moonlight : Game
 {
     GraphicsDeviceManager GraphicsDeviceManager { get; }
 
@@ -29,12 +29,12 @@ public class Game1 : Game
     [STAThread]
     internal static void Main()
     {
-        using (Game1 game = new Game1())
+        using (Moonlight game = new Moonlight())
         {
             game.Run();
         }
     }
-    private Game1()
+    private Moonlight()
     {
         //setup our graphics device, default window size, etc
         //here is where i will make a plea to you, intrepid game developer:

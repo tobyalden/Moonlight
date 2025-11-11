@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MoonTools.ECS;
-using FNAECSTemplate.Components;
+using Moonlight.Components;
 using FontStashSharp;
-using FNAECSTemplate.Content;
+using Moonlight.Content;
 
-namespace FNAECSTemplate.Renderers;
+namespace Moonlight.Renderers;
 
 /*
 this is a renderer. a renderer is just like a system, 

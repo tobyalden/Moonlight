@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 
-namespace FNAECSTemplate.Content;
+namespace Moonlight.Content;
 public static class Textures
 {
     public static void Initialize(ContentManager content)

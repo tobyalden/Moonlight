@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using MoonTools.ECS;
 using System.Text;
-using FNAECSTemplate.Messages;
-using FNAECSTemplate.Utility;
+using Moonlight.Messages;
+using Moonlight.Utility;
 
-namespace FNAECSTemplate.Systems;
+namespace Moonlight.Systems;
 
 public enum Actions
 {
