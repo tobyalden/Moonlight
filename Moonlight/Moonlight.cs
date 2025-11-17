@@ -13,6 +13,11 @@ namespace Moonlight;
 
 public class Moonlight : Game
 {
+    public static readonly int RenderWidth = 640;
+    public static readonly int RenderHeight = 480;
+    public static readonly float AspectRatio = (float)RenderWidth / RenderHeight;
+    public static RenderTarget2D RenderTarget;
+
     GraphicsDeviceManager GraphicsDeviceManager { get; }
 
     /*
@@ -41,8 +46,8 @@ public class Moonlight : Game
         GraphicsDeviceManager = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
 
-        GraphicsDeviceManager.PreferredBackBufferWidth = 1024;
-        GraphicsDeviceManager.PreferredBackBufferHeight = 768;
+        GraphicsDeviceManager.PreferredBackBufferWidth = 1280;
+        GraphicsDeviceManager.PreferredBackBufferHeight = 720;
         GraphicsDeviceManager.SynchronizeWithVerticalRetrace = true;
 
         IsFixedTimeStep = false;
@@ -55,6 +60,8 @@ public class Moonlight : Game
         /*
         CONTENT
         */
+
+        RenderTarget = new RenderTarget2D(GraphicsDevice, RenderWidth, RenderHeight);
 
         /*
         SpriteBatch is FNA/XNA's abstraction for drawing sprites on the screen.
@@ -89,7 +96,7 @@ public class Moonlight : Game
 
         var player = World.CreateEntity();
         World.Set(player, new Sprite(Textures.Player, 0.0f));
-        World.Set(player, new Position(new Vector2(Window.ClientBounds.Width * 0.5f, Window.ClientBounds.Height * 0.5f)));
+        World.Set(player, new Position(new Vector2(RenderWidth * 0.5f, RenderHeight * 0.5f)));
 
         base.LoadContent();
     }
@@ -118,15 +125,40 @@ public class Moonlight : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue); //set the color of the background. cornflower blue is XNA tradition.
+        GraphicsDevice.SetRenderTarget(RenderTarget);
 
-        /*
-        call renderers here.
-        renderers don't get passed the game time. 
-        if you are thinking about passing the game time to a renderer
-        in order to do something, try doing it some other way. you'll thank me later.
-        */
+        GraphicsDevice.Clear(Color.CornflowerBlue);
         SpriteRenderer.Draw();
+
+        GraphicsDevice.SetRenderTarget(null);
+        GraphicsDevice.Clear(Color.Black);
+        SpriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.Opaque,
+                SamplerState.PointClamp,
+                DepthStencilState.None,
+                RasterizerState.CullCounterClockwise
+            );
+
+        var height = Window.ClientBounds.Height;
+        // height -= (height % RenderHeight); // uncomment for integer scaling
+        var width = (int)MathF.Floor(height * AspectRatio);
+        var wDiff = Window.ClientBounds.Width - width;
+        var hDiff = Window.ClientBounds.Height - height;
+
+        SpriteBatch.Draw(
+            RenderTarget,
+            new Rectangle(
+                (int)MathF.Floor(wDiff * 0.5f),
+                (int)MathF.Floor(hDiff * 0.5f),
+                width,
+                height),
+            null,
+            Color.White
+        );
+
+        SpriteBatch.End();
+
         base.Draw(gameTime);
     }
 }
