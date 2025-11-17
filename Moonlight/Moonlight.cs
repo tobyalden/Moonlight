@@ -21,8 +21,7 @@ public class Moonlight : Game
     World World { get; } = new World();
 
     Input Input;
-    ExampleSystem ExampleSystem;
-    ExampleRenderer ExampleRenderer;
+    SpriteRenderer SpriteRenderer;
 
     SpriteBatch SpriteBatch;
 
@@ -75,7 +74,6 @@ public class Moonlight : Game
         you can pass in information that these systems might need to their constructors.
         it doesn't matter what order you create the systems in, we'll specify in what order they run later.
         */
-        ExampleSystem = new(World);
         Input = new(World);
 
         /*
@@ -83,17 +81,15 @@ public class Moonlight : Game
         */
 
         //same as above, but for the renderer
-        ExampleRenderer = new(World, SpriteBatch);
+        SpriteRenderer = new SpriteRenderer(World, SpriteBatch);
 
         /*
         ENTITIES
         */
 
-        for (int i = 0; i < 10; i++)
-        {
-            var e = World.CreateEntity();
-            World.Set(e, new ExampleComponent(0f));
-        }
+        var player = World.CreateEntity();
+        World.Set(player, new Sprite(Textures.Player, 0.0f));
+        World.Set(player, new Position(new Vector2(Window.ClientBounds.Width * 0.5f, Window.ClientBounds.Height * 0.5f)));
 
         base.LoadContent();
     }
@@ -115,7 +111,7 @@ public class Moonlight : Game
         over the order systems run in, and whether they run at all.
         */
         Input.Update(gameTime.ElapsedGameTime); //always update this before anything that takes inputs
-        ExampleSystem.Update(gameTime.ElapsedGameTime);
+        //ExampleSystem.Update(gameTime.ElapsedGameTime);
         World.FinishUpdate(); //always call this at the end of your update function.
         base.Update(gameTime);
     }
@@ -130,7 +126,7 @@ public class Moonlight : Game
         if you are thinking about passing the game time to a renderer
         in order to do something, try doing it some other way. you'll thank me later.
         */
-        ExampleRenderer.Draw();
+        SpriteRenderer.Draw();
         base.Draw(gameTime);
     }
 }

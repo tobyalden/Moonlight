@@ -11,8 +11,12 @@ using Microsoft.Xna.Framework.Media;
 namespace Moonlight.Content;
 public static class Textures
 {
+    public static Texture2D Sprites { get; private set; }
+    public static readonly Rectangle Enemy = new Rectangle(0, 0, 100, 100);
+    public static readonly Rectangle Player = new Rectangle(100, 0, 100, 100);
     public static void Initialize(ContentManager content)
     {
+        Sprites = content.Load<Texture2D>("Textures/sprites");
     }
 }
 public static class Fonts
@@ -22,8 +26,8 @@ public static class Fonts
     {
         Opensans = new FontSystem();
         Opensans.AddFont(File.ReadAllBytes(
-            Path.Combine(
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), content.RootDirectory, @"Fonts/opensans.ttf"
+            System.IO.Path.Combine(
+                System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), content.RootDirectory, @"Fonts/opensans.ttf"
             )
         ));
     }
